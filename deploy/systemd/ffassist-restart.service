@@ -1,0 +1,6 @@
+[Unit]
+Description=ffassist daily 3 AM restart
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl --user restart ffassist.service

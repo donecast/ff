@@ -1,0 +1,9 @@
+[Unit]
+Description=Restart ffassist daily at 03:00 local time
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

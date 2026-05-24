@@ -1,0 +1,16 @@
+[Unit]
+Description=ffassist MFL Eliminator draft assistant (Slack bot + pollers)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/scott/FantasyFootball
+EnvironmentFile=/home/scott/FantasyFootball/.env
+ExecStart=/home/scott/FantasyFootball/.venv/bin/python -m ffassist.service
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/scott/FantasyFootball/data/service.log
+StandardError=append:/home/scott/FantasyFootball/data/service.log
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=ffassist hourly health check (restart if inactive/stuck)
+
+[Service]
+Type=oneshot
+ExecStart=/home/scott/FantasyFootball/scripts/healthcheck.sh
