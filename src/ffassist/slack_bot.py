@@ -39,6 +39,12 @@ HELP_TEXT = """*Just talk to me in plain English.* I can:
   • Propose a draft pick (`take Jefferson` etc.) — you confirm with `yes`
   • Set / change / disable auto-pick rules per league
     (e.g. "for 37714, if time's running low, prefer best WR or TE, never kicker")
+  • Build/edit an *auto-draft list* per league
+    (e.g. "seed Joey Wright auto-draft from top-20", "add James Conner to Joey Wright auto-draft",
+     "remove Tyreek from Joey Wright auto-draft", "show my Joey Wright auto-draft list")
+  • Turn on MFL auto-mode when MFL has forced you to auto-pick
+    (e.g. "mfl auto mode on for Joey Wright") — bot will race MFL using your list
+  • I'll proactively ping you when you're *4 picks away* in any league
 
 *Fast-paths I keep instant (no AI round-trip):*
   • `yes` / `no` — confirm or cancel a pending pick or signup

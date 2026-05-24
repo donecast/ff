@@ -674,4 +674,241 @@ def poll_all(league_ids: list[str] | None = None) -> list[dict]:
                     results.append({"league": lid, **rem_hit})
             except Exception as e:
                 print(f"[reminder-error] league={lid} {e!r}")
+            try:
+                paw_hit = picks_away_alert(mfl, notifier, cfg, players_lookup)
+                if paw_hit:
+                    results.append({"league": lid, **paw_hit})
+            except Exception as e:
+                print(f"[picks-away-error] league={lid} {e!r}")
+            try:
+                am_hit = mfl_auto_mode_pick(mfl, notifier, cfg, players_lookup)
+                if am_hit:
+                    results.append({"league": lid, **am_hit})
+            except Exception as e:
+                print(f"[auto-mode-error] league={lid} {e!r}")
     return results
+
+
+# ---------------------------------------------------------------------------
+# Auto-draft list features
+# ---------------------------------------------------------------------------
+
+PICKS_AWAY_THRESHOLD = 4
+
+
+def _picks_until_me(
+    picks_so_far: int,
+    order: list[str],
+    draft_type: str | None,
+    my_id: str,
+    horizon: int = 12,
+) -> int | None:
+    """How many picks until Scott is on the clock again. None if not within horizon."""
+    from ffassist.draft_state import snake_owner
+
+    if not order or not my_id:
+        return None
+    current_overall = picks_so_far + 1  # 1-based "next pick"
+    for offset in range(0, horizon + 1):
+        who = snake_owner(current_overall + offset, order, draft_type=draft_type)
+        if who == my_id:
+            return offset
+    return None
+
+
+def picks_away_alert(
+    mfl: MFLClient,
+    notifier: SlackNotifier,
+    league_cfg: LeagueConfig,
+    players_lookup: dict[str, Player],
+) -> dict | None:
+    """When Scott is exactly N picks away from being on the clock, post a heads-up
+    with the current auto-draft list (and top-5 still-available entries from it),
+    so he can edit/add before MFL forces him on the clock.
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import (
+        extract_draft_order,
+        extract_draft_type,
+        parse_picks,
+    )
+
+    league_id = league_cfg.league_id
+    state = state_mod.load()
+    ls = state["leagues"].setdefault(league_id, {})
+
+    try:
+        dr = mfl.draft_results(league_id)
+    except Exception:
+        return None
+    picks = parse_picks(dr)
+    order = extract_draft_order(dr) or ls.get("draft_order") or []
+    draft_type = extract_draft_type(dr) or ls.get("draft_type")
+
+    away = _picks_until_me(len(picks), order, draft_type, league_cfg.my_franchise_id)
+    if away is None or away != PICKS_AWAY_THRESHOLD:
+        return None
+
+    # Dedupe: only fire once per "approach" (the pick# we'll be on-the-clock for)
+    target_pick = len(picks) + 1 + PICKS_AWAY_THRESHOLD
+    if ls.get("picks_away_alerted_for_pick") == target_pick:
+        return None
+
+    label = league_cfg.display_name or league_label(league_id, state)
+    drafted_ids = {p.player_id for p in picks}
+    auto_list = autodraft.get_list(league_id)
+    auto_mode_on = autodraft.get_auto_mode(league_id)
+
+    lines = [
+        f":hourglass_flowing_sand: *4 picks away* in *{label}*'s league — you're up at pick *#{target_pick}*.",
+    ]
+    if auto_list:
+        avail_from_list = [pid for pid in auto_list if pid not in drafted_ids]
+        lines.append(
+            f"_Auto-draft list:_ {len(auto_list)} entries, *{len(avail_from_list)} still available*."
+        )
+        top = avail_from_list[:5]
+        if top:
+            lines.append("*Next 5 from your list:*")
+            for i, pid in enumerate(top, 1):
+                pl = players_lookup.get(pid)
+                if pl:
+                    lines.append(f"  {i}. {pl.display()}")
+                else:
+                    lines.append(f"  {i}. (unknown player_id {pid})")
+        else:
+            lines.append(":warning: All entries on your list have been drafted — add more or you'll get top-20 #1 / MFL's default.")
+    else:
+        lines.append(
+            ":bulb: No auto-draft list for this league yet. "
+            "Reply: _\"build auto-draft list for " + label + " from top-20\"_ to seed one, "
+            "or _\"add <player> to " + label + " auto-draft\"_."
+        )
+    if auto_mode_on:
+        lines.append(":robot_face: *MFL auto-draft mode is ON* — bot will race to submit from your list when you go on the clock.")
+    else:
+        lines.append("_(MFL auto-draft mode is OFF for this league. If MFL has flipped you to auto-pick, reply: \"mfl auto mode on for " + label + "\".)_")
+
+    result = notifier.channel("\n".join(lines))
+    if not result or not result.get("ok"):
+        return None
+    ls["picks_away_alerted_for_pick"] = target_pick
+    state_mod.save(state)
+    return {"phase": "picks_away_4", "league": league_id, "target_pick": target_pick}
+
+
+def mfl_auto_mode_pick(
+    mfl: MFLClient,
+    notifier: SlackNotifier,
+    league_cfg: LeagueConfig,
+    players_lookup: dict[str, Player],
+) -> dict | None:
+    """When MFL has flipped Scott to auto-draft (no clock, instant picks), this
+    races MFL by submitting from Scott's auto-draft list the moment we see he's
+    on the clock. Only fires when `mfl_auto_mode` is True for the league.
+
+    On exhausted list: posts a warning and does NOT pick (per Scott's preference —
+    don't auto-pick outside the list in this mode).
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import (
+        extract_draft_order,
+        extract_draft_type,
+        next_pick_number,
+        parse_picks,
+        snake_owner,
+    )
+
+    league_id = league_cfg.league_id
+    if not autodraft.get_auto_mode(league_id):
+        return None
+
+    state = state_mod.load()
+    ls = state["leagues"].setdefault(league_id, {})
+
+    try:
+        dr = mfl.draft_results(league_id)
+    except Exception:
+        return None
+    picks = parse_picks(dr)
+    order = extract_draft_order(dr) or ls.get("draft_order") or []
+    draft_type = extract_draft_type(dr) or ls.get("draft_type")
+    if not order:
+        return None
+    next_pick = next_pick_number(picks, team_count=len(order))
+    on_clock = snake_owner(next_pick, order, draft_type=draft_type)
+    if on_clock != league_cfg.my_franchise_id:
+        return None
+
+    # Dedupe: don't re-submit for the same pick
+    if ls.get("auto_mode_submitted_pick") == next_pick:
+        return None
+
+    drafted_ids = {p.player_id for p in picks}
+    chosen_id = autodraft.next_available(league_id, drafted_ids)
+    label = league_cfg.display_name or league_label(league_id, state)
+
+    if not chosen_id:
+        # Don't pick outside the list. Loud alert.
+        if ls.get("auto_mode_exhausted_alerted_pick") != next_pick:
+            notifier.channel(
+                f":rotating_light: *MFL auto-mode ON for {label} but your list is EXHAUSTED* — "
+                f"you're on the clock at pick #{next_pick}. MFL will pick for you. "
+                f"Reply: _\"add <player> to {label} auto-draft\"_ now."
+            )
+            ls["auto_mode_exhausted_alerted_pick"] = next_pick
+            state_mod.save(state)
+        return {"phase": "auto_mode_exhausted", "league": league_id}
+
+    round_num = (next_pick - 1) // len(order) + 1
+    slot = next_pick - (round_num - 1) * len(order)
+    pl = players_lookup.get(chosen_id)
+    name = pl.display() if pl else f"player_id={chosen_id}"
+
+    try:
+        resp = mfl.submit_live_draft_pick(
+            league_id=league_id,
+            player_id=chosen_id,
+            round_=round_num,
+            pick=slot,
+        )
+    except Exception as e:
+        notifier.channel(
+            f":x: *Auto-mode submit FAILED* for {label} pick #{next_pick} "
+            f"(tried *{name}*): `{e!r}`. MFL may pick for you."
+        )
+        ls["auto_mode_submitted_pick"] = next_pick  # don't retry-loop
+        state_mod.save(state)
+        return {"phase": "auto_mode_error", "league": league_id, "error": repr(e)}
+
+    # Verify
+    try:
+        dr2 = mfl._export("draftResults", league_id, force=True)["draftResults"]
+        picks_now = parse_picks(dr2)
+        made = any(
+            p.player_id == chosen_id and p.round == round_num and p.pick == slot
+            for p in picks_now
+        )
+    except Exception:
+        made = None
+
+    if made is True:
+        notifier.channel(
+            f":robot_face: *Auto-mode pick* in {label} — submitted *{name}* "
+            f"(R{round_num}.{slot:02d}, #{next_pick}). :white_check_mark: verified."
+        )
+        # Remove the player from the list since they're now drafted
+        autodraft.remove(league_id, chosen_id)
+    elif made is False:
+        notifier.channel(
+            f":x: *Auto-mode submit didn't land* for {label} pick #{next_pick} "
+            f"(tried *{name}*). MFL response: ```{resp}```"
+        )
+    else:
+        notifier.channel(
+            f":warning: *Auto-mode submit unverified* for {label} pick #{next_pick} "
+            f"(tried *{name}*). Check MFL."
+        )
+    ls["auto_mode_submitted_pick"] = next_pick
+    state_mod.save(state)
+    return {"phase": "auto_mode_pick", "league": league_id, "player_id": chosen_id, "made": made}

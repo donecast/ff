@@ -651,6 +651,210 @@ def resync_on_clock_threads() -> str:
     return "\n".join(lines)
 
 
+def _resolve_player_for_autodraft(query: str, players_lookup: dict) -> tuple[str | None, str]:
+    """Fuzzy-match a player name to an MFL id. Returns (player_id, display_or_error)."""
+    from rapidfuzz import process
+    names = {p.display(): p for p in players_lookup.values()}
+    match = process.extractOne(query, list(names.keys()), score_cutoff=70)
+    if not match:
+        return None, f"No player matched '{query}' (score < 70)."
+    p = names[match[0]]
+    return p.id, p.display()
+
+
+@beta_tool
+def get_autodraft_list(league_id: str) -> str:
+    """Show Scott's auto-draft list for a league (ordered by priority).
+
+    `league_id` accepts numeric MFL id ("42033") or host name ("Joey Wright").
+    Also reports whether MFL auto-mode is currently ON for the league.
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import parse_picks, parse_players
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    lst = autodraft.get_list(lid)
+    auto_on = autodraft.get_auto_mode(lid)
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    if not lst:
+        return (
+            f"*{host}* auto-draft list is empty. "
+            f"MFL auto-mode: {'ON' if auto_on else 'off'}.\n"
+            "Seed it with `seed_autodraft_from_top20` or `add_to_autodraft_list`."
+        )
+
+    with MFLClient() as mfl:
+        players = parse_players(mfl.players())
+        drafted = {p.player_id for p in parse_picks(mfl.draft_results(lid))}
+
+    lines = [f"*{host}* auto-draft list ({len(lst)} entries). MFL auto-mode: {'*ON*' if auto_on else 'off'}."]
+    for i, pid in enumerate(lst, 1):
+        pl = players.get(pid)
+        name = pl.display() if pl else f"player_id={pid}"
+        tag = " ~drafted~" if pid in drafted else ""
+        lines.append(f"  {i:>2}. {name}{tag}")
+    avail = sum(1 for pid in lst if pid not in drafted)
+    lines.append(f"_{avail} still available._")
+    return "\n".join(lines)
+
+
+@beta_tool
+def set_autodraft_list(league_id: str, players_csv: str) -> str:
+    """REPLACE the auto-draft list for a league with the given ordered players.
+
+    `players_csv` is a comma-separated list of player names IN PRIORITY ORDER
+    (top of list = picked first). Each name is fuzzy-matched against MFL's player
+    pool. Use this when Scott gives you a full list at once. For incremental
+    edits use add_to_autodraft_list / remove_from_autodraft_list.
+
+    Example: set_autodraft_list("Joey Wright", "Tank Dell, James Conner, Evan Engram, Tyjae Spears")
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import parse_players
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    names = [n.strip() for n in players_csv.split(",") if n.strip()]
+    if not names:
+        return "No player names parsed."
+    with MFLClient() as mfl:
+        players = parse_players(mfl.players())
+    resolved: list[str] = []
+    misses: list[str] = []
+    display: list[str] = []
+    for q in names:
+        pid, disp = _resolve_player_for_autodraft(q, players)
+        if pid:
+            resolved.append(pid)
+            display.append(disp)
+        else:
+            misses.append(q)
+    if not resolved:
+        return ":x: No players matched. Misses: " + ", ".join(misses)
+    autodraft.set_list(lid, resolved)
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    out = [f":white_check_mark: Set {host} auto-draft list ({len(resolved)} entries):"]
+    for i, d in enumerate(display, 1):
+        out.append(f"  {i:>2}. {d}")
+    if misses:
+        out.append(":warning: Could not match: " + ", ".join(misses))
+    return "\n".join(out)
+
+
+@beta_tool
+def add_to_autodraft_list(league_id: str, player_name: str, position: int | None = None) -> str:
+    """Add a single player to the auto-draft list.
+
+    By default appends at the end. Pass `position` (1-based) to insert at a specific
+    spot — e.g. position=1 makes them the next pick if Scott goes on the clock.
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import parse_players
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    with MFLClient() as mfl:
+        players = parse_players(mfl.players())
+    pid, disp = _resolve_player_for_autodraft(player_name, players)
+    if not pid:
+        return disp
+    idx = (position - 1) if position else None
+    added = autodraft.add(lid, pid, index=idx)
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    if not added:
+        return f"_{disp} was already on the {host} list._"
+    spot = f"position {position}" if position else f"end ({len(autodraft.get_list(lid))})"
+    return f":white_check_mark: Added *{disp}* to {host} auto-draft list at {spot}."
+
+
+@beta_tool
+def remove_from_autodraft_list(league_id: str, player_name: str) -> str:
+    """Remove a player from the auto-draft list by name."""
+    from ffassist import autodraft
+    from ffassist.draft_state import parse_players
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    lst = autodraft.get_list(lid)
+    if not lst:
+        return "List is empty — nothing to remove."
+    with MFLClient() as mfl:
+        players = parse_players(mfl.players())
+    # Only match against players already on the list
+    on_list_names = {players[pid].display(): pid for pid in lst if pid in players}
+    from rapidfuzz import process
+    match = process.extractOne(player_name, list(on_list_names.keys()), score_cutoff=70)
+    if not match:
+        return f"No player on the list matched '{player_name}'."
+    pid = on_list_names[match[0]]
+    autodraft.remove(lid, pid)
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    return f":white_check_mark: Removed *{match[0]}* from {host} auto-draft list."
+
+
+@beta_tool
+def seed_autodraft_from_top20(league_id: str, n: int = 20) -> str:
+    """Bootstrap an auto-draft list by copying the current top-20 in priority order.
+
+    Use this as a fast starting point — Scott can then add/remove/reorder. Replaces
+    any existing list. `n` defaults to 20 (full list); pass smaller for just the top few.
+    """
+    from ffassist import autodraft, rankings_v2 as _r2
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    state = state_mod.load()
+    ls = state.get("leagues", {}).get(lid, {})
+    cached = ls.get("last_top20") or []
+    if not cached:
+        try:
+            with MFLClient() as mfl:
+                _text, cached = _r2.build_league_top_20(lid, mfl, settings)
+        except Exception as e:
+            return f":x: Could not build top-20 for L{lid}: {e!r}"
+    if not cached:
+        return f":x: No top-20 entries available for L{lid}."
+    n = max(1, min(n, len(cached)))
+    pids = [entry["player_id"] for entry in cached[:n]]
+    autodraft.set_list(lid, pids)
+    host = ls.get("display_name") or f"L{lid}"
+    lines = [f":white_check_mark: Seeded {host} auto-draft list from top-{n}:"]
+    for i, entry in enumerate(cached[:n], 1):
+        lines.append(f"  {i:>2}. {entry['player_name']} ({entry['position']} {entry['team']})")
+    return "\n".join(lines)
+
+
+@beta_tool
+def set_mfl_auto_mode(league_id: str, on: bool) -> str:
+    """Toggle MFL auto-draft mode for a league.
+
+    Turn ON when MFL has flipped Scott to auto-pick (no clock, MFL picks instantly).
+    When ON, the bot races MFL by submitting from Scott's auto-draft list the
+    moment he's on the clock. Turn OFF when Scott is manually drafting again.
+
+    BEFORE turning on: confirm an auto-draft list exists for the league
+    (call get_autodraft_list). If empty, warn Scott — MFL will pick for him.
+    """
+    from ffassist import autodraft
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    autodraft.set_auto_mode(lid, on)
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    state_label = "ON :robot_face:" if on else "off"
+    extra = ""
+    if on and not autodraft.get_list(lid):
+        extra = "\n:warning: List is empty — add players or MFL will pick for you."
+    return f"MFL auto-mode for {host}: *{state_label}*.{extra}"
+
+
 @beta_tool
 def propose_pick(player_id: str) -> str:
     """Propose a draft pick in the active on-the-clock thread.
@@ -1231,6 +1435,12 @@ TOOLS = [
     match_player,
     bootstrap_draft_thread,
     resync_on_clock_threads,
+    get_autodraft_list,
+    set_autodraft_list,
+    add_to_autodraft_list,
+    remove_from_autodraft_list,
+    seed_autodraft_from_top20,
+    set_mfl_auto_mode,
     propose_pick,
     get_rules_summary,
     compare_rules,
