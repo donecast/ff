@@ -187,18 +187,41 @@ def get_league_top_20(league_id: str) -> str:
     host = ls.get("display_name") or f"L{lid}"
     text = ls.get("last_top20_text")
     last_at = ls.get("last_top20_at", 0)
+    last_pick = ls.get("last_top20_pick")
     now = time.time()
     age_sec = now - last_at if last_at else None
 
-    if text and age_sec is not None and age_sec < 1800:
+    # Determine the CURRENT pick — if it differs from the cached one, the cache is
+    # stale by definition (a player has been drafted since) and must NOT be returned.
+    current_pick = None
+    try:
+        with MFLClient() as mfl:
+            dr = mfl.draft_results(lid)
+            from ffassist.draft_state import (
+                extract_draft_order as _edo,
+                next_pick_number as _npn,
+                parse_picks as _pp,
+            )
+            picks_now = _pp(dr)
+            order_now = _edo(dr) or ls.get("draft_order") or []
+            tc_now = len(order_now) if order_now else None
+            current_pick = _npn(picks_now, team_count=tc_now)
+    except Exception:
+        pass
+
+    cache_pick_matches = (
+        current_pick is not None and last_pick is not None and current_pick == last_pick
+    )
+
+    if text and age_sec is not None and age_sec < 1800 and cache_pick_matches:
         age_label = f"{int(age_sec / 60)}m ago" if age_sec > 60 else "just now"
         return (
-            f"*Top 20 in {host}'s league* (cached {age_label}):\n"
+            f"*Top 20 in {host}'s league* (cached {age_label}, pick #{last_pick}):\n"
             "Format: rank. Name (Pos, Team) (PPG_rank/ADP/Raw_rank-fce) {dupes/bye_twins}\n  · `fce` = # of tracked FCE drafts this player has been selected in\n\n"
             f"{text}"
         )
 
-    # Stale or missing — compute fresh and store
+    # Stale, missing, or pick has advanced — compute fresh and store
     try:
         with MFLClient() as mfl:
             fresh_text, fresh_list = _r2.build_league_top_20(lid, mfl, settings)
@@ -206,7 +229,7 @@ def get_league_top_20(league_id: str) -> str:
         if text:
             old_label = f"{int(age_sec / 60)}m ago" if age_sec else "unknown age"
             return (
-                f":warning: Fresh compute failed ({e!r}); returning stale cached list ({old_label}):\n\n"
+                f":warning: Fresh compute failed ({e!r}); returning stale cached list ({old_label}, pick #{last_pick}):\n\n"
                 f"*Top 20 in {host}'s league*:\n{text}"
             )
         return f":x: Could not build top-20 for {host}'s league: {e!r}"
@@ -215,6 +238,8 @@ def get_league_top_20(league_id: str) -> str:
     state["leagues"][lid]["last_top20_text"] = fresh_text
     state["leagues"][lid]["last_top20"] = fresh_list
     state["leagues"][lid]["last_top20_at"] = now
+    if current_pick is not None:
+        state["leagues"][lid]["last_top20_pick"] = current_pick
     state_mod.save(state)
     return (
         f"*Top 20 in {host}'s league* (freshly computed):\n"
@@ -589,6 +614,41 @@ def bootstrap_draft_thread(league_id: str) -> str:
         f"Tell Scott to reply in the new Slack thread with the player he wants, "
         f"then 'yes' to confirm. thread_ts={result['ts']}"
     )
+
+
+@beta_tool
+def resync_on_clock_threads() -> str:
+    """Recovery: post a FRESH on-the-clock thread for every tracked league where Scott is
+    currently on the clock — bypasses the poller's "already alerted" dedupe.
+
+    Use when Scott says things like "resync", "give me my threads", "I'm missing threads",
+    "the bot was off, refresh", or any time after downtime/restart when threads are missing
+    for active picks. Posts ONE new thread per on-the-clock league (with top-20 list inside),
+    skips leagues where it's someone else's pick. Safe to call repeatedly — each call posts a
+    new thread in the leagues where Scott is on the clock.
+    """
+    from ffassist.poller import force_resync_threads
+
+    result = force_resync_threads()
+    posted = result.get("posted", [])
+    skipped = result.get("skipped", [])
+    errors = result.get("errors", [])
+    lines = []
+    if posted:
+        lines.append(f":white_check_mark: Posted {len(posted)} fresh thread(s):")
+        for p in posted:
+            lines.append(f"  • {p.get('host', p['league'])} — pick #{p.get('pick')}")
+    else:
+        lines.append("No new threads posted — Scott isn't on the clock in any tracked league right now.")
+    if skipped:
+        not_oc = [s for s in skipped if "not on the clock" in s.get("reason", "")]
+        if not_oc:
+            lines.append(f"_Skipped {len(not_oc)} league(s) where it's someone else's pick._")
+    if errors:
+        lines.append(f":warning: Errors in {len(errors)} league(s):")
+        for e in errors:
+            lines.append(f"  • L{e['league']}: {e['error']}")
+    return "\n".join(lines)
 
 
 @beta_tool
@@ -1170,6 +1230,7 @@ TOOLS = [
     get_my_picks,
     match_player,
     bootstrap_draft_thread,
+    resync_on_clock_threads,
     propose_pick,
     get_rules_summary,
     compare_rules,

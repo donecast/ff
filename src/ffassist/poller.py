@@ -77,10 +77,14 @@ def poll_once(
     league_cfg: LeagueConfig,
     players_lookup: dict[str, Player],
     rankings_global: dict[str, float],
+    force: bool = False,
 ) -> dict | None:
     """Check one league. If on-the-clock state changed to my franchise, post a Slack DM.
 
     Returns the notification dict (channel + ts + pick_number) when a new on-the-clock alert is sent.
+
+    `force=True` bypasses the `last_alerted_pick` dedupe and posts a fresh thread even if we
+    already alerted on this pick. Used by `force_resync_threads` after downtime.
     """
     league_id = league_cfg.league_id
     state = state_mod.load()
@@ -116,7 +120,7 @@ def poll_once(
         state_mod.save(state)
         return None
 
-    if last_alerted_pick == next_pick:
+    if last_alerted_pick == next_pick and not force:
         return None
 
     # We're on the clock for a pick we haven't alerted on yet.
@@ -188,9 +192,17 @@ def poll_once(
 
     now = _time.time()
     last_top20_at = league_state.get("last_top20_at", 0)
+    last_top20_pick = league_state.get("last_top20_pick")
     top20_text = league_state.get("last_top20_text") or ""
     top20_list = league_state.get("last_top20") or []
-    use_cached = top20_text and (now - last_top20_at) < 1800  # 30 min
+    # Reuse the cached list ONLY when it was built for the SAME current pick.
+    # Any pick advance invalidates the list (a player Scott or anyone just drafted
+    # would otherwise still appear). 30-min ceiling is the upper safety bound.
+    use_cached = (
+        top20_text
+        and last_top20_pick == next_pick
+        and (now - last_top20_at) < 1800
+    )
 
     if not use_cached:
         try:
@@ -198,6 +210,7 @@ def poll_once(
             league_state["last_top20_text"] = top20_text
             league_state["last_top20"] = top20_list
             league_state["last_top20_at"] = now
+            league_state["last_top20_pick"] = next_pick
             cached_label = "(fresh)"
         except Exception as e:
             top20_text = f":x: Top-20 build failed: {e!r}"
@@ -553,6 +566,69 @@ def default_top1_auto_pick(
     state["threads"][thread_ts] = thread
     state_mod.save(state)
     return {"phase": "default_top1", "league": league_id, "player_id": chosen["player_id"], "made": made}
+
+
+def force_resync_threads(league_ids: list[str] | None = None) -> dict:
+    """Recovery command: for every tracked league where Scott is on the clock right now,
+    post a FRESH on-the-clock thread (with top-20), regardless of whether the poller
+    previously alerted on that pick.
+
+    Use after the bot was offline (crash, reboot) and Scott can no longer see threads
+    for the leagues he's on the clock in.
+
+    Returns {"posted": [...], "skipped": [...], "errors": [...]} for caller display.
+    """
+    league_ids = league_ids or settings.league_ids
+    posted: list[dict] = []
+    skipped: list[dict] = []
+    errors: list[dict] = []
+    if not league_ids:
+        return {"posted": posted, "skipped": skipped, "errors": errors}
+
+    notifier = SlackNotifier()
+    with MFLClient() as mfl:
+        players_lookup = parse_players(mfl.players())
+        adp = get_filtered_adp(mfl.adp(), players_lookup)
+        for lid in league_ids:
+            try:
+                league = mfl.league(lid)
+                my_id = find_my_franchise(league, settings.mfl_username)
+                if not my_id:
+                    skipped.append({"league": lid, "reason": "no franchise match"})
+                    continue
+                host = extract_host(league.get("name", "") or "")
+                if host:
+                    s = state_mod.load()
+                    ls = s.setdefault("leagues", {}).setdefault(lid, {})
+                    if ls.get("display_name") != host or ls.get("league_name") != league.get("name"):
+                        ls["display_name"] = host
+                        ls["league_name"] = league.get("name", "")
+                        state_mod.save(s)
+                cfg = LeagueConfig(
+                    league_id=lid, my_franchise_id=my_id, year=mfl.year, display_name=host
+                )
+                # Resync = "the bot is wrong, give me fresh data." Invalidate the
+                # top-20 cache for this league so poll_once recomputes from scratch.
+                s = state_mod.load()
+                ls = s.setdefault("leagues", {}).setdefault(lid, {})
+                ls["last_top20_pick"] = None
+                ls["last_top20_at"] = 0
+                state_mod.save(s)
+                hit = poll_once(mfl, notifier, cfg, players_lookup, adp, force=True)
+                if hit:
+                    posted.append({"league": lid, "host": host or f"L{lid}", **hit})
+                else:
+                    # poll_once returned None — Scott isn't on the clock here
+                    s = state_mod.load()
+                    ls = s.get("leagues", {}).get(lid, {})
+                    skipped.append({
+                        "league": lid,
+                        "host": host or f"L{lid}",
+                        "reason": f"not on the clock (pick #{ls.get('next_pick')})",
+                    })
+            except Exception as e:
+                errors.append({"league": lid, "error": repr(e)})
+    return {"posted": posted, "skipped": skipped, "errors": errors}
 
 
 def poll_all(league_ids: list[str] | None = None) -> list[dict]:

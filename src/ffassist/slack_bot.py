@@ -43,6 +43,7 @@ HELP_TEXT = """*Just talk to me in plain English.* I can:
 *Fast-paths I keep instant (no AI round-trip):*
   • `yes` / `no` — confirm or cancel a pending pick or signup
   • `stop` / `wait` / `hold` — in a draft thread, cancel auto-pick for that pick
+  • `resync` — after bot downtime, post a fresh thread for every league you're on the clock in
   • `help` — this message
 
 *Auto-pick:* if a rule is set for a league, I warn in-thread when <30 min remain, then submit at 10 min unless you say `stop`.
@@ -111,9 +112,33 @@ def build_app() -> App:
 
 
 def _handle_toplevel(text: str, say: Any, thread_ts: str | None) -> None:
-    stripped = text.strip().lower()
+    stripped = text.strip().lower().lstrip("/")
     if stripped in {"help", "?"} or stripped == "":
         say(text=HELP_TEXT, thread_ts=thread_ts)
+        return
+    if stripped in {"resync", "resync threads", "resync drafts", "refresh threads"}:
+        from ffassist.poller import force_resync_threads
+
+        say(text=":hourglass_flowing_sand: Resyncing — checking every tracked league…", thread_ts=thread_ts)
+        try:
+            result = force_resync_threads()
+        except Exception as e:
+            say(text=f":x: Resync failed: `{e!r}`", thread_ts=thread_ts)
+            return
+        posted = result.get("posted", [])
+        errors = result.get("errors", [])
+        if posted:
+            lines = [f":white_check_mark: Posted {len(posted)} fresh thread(s):"]
+            for p in posted:
+                lines.append(f"  • {p.get('host', p['league'])} — pick #{p.get('pick')}")
+            say(text="\n".join(lines), thread_ts=thread_ts)
+        else:
+            say(text="You're not on the clock in any tracked league right now.", thread_ts=thread_ts)
+        if errors:
+            err_lines = [":warning: Errors:"]
+            for e in errors:
+                err_lines.append(f"  • L{e['league']}: {e['error']}")
+            say(text="\n".join(err_lines), thread_ts=thread_ts)
         return
     _nlp_fallback(text, None, say, thread_ts)
 
