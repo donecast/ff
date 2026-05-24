@@ -1,0 +1,634 @@
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text="Gimme the top 20 list for 37714 (Matt Harmon).  If you can't"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778648400.009039 text='Because of some rate limiting issue, you did not get the not'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[sfb-poll] new: 1 Any Eliminator
+[mfl-poll] events: [{'league': '54069', 'ts': '1778692191.259149', 'channel': 'C0B372BUZJ5', 'pick': 8}]
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl-poll-error] HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=42033 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=42033 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=37714 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl-poll-error] HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl-poll-error] HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[sfb-poll] new: 93 Rookie Fever 1 (rookies only)
+[account-monitor] alerted on 1 new league(s)
+[sfb-poll] new: 34 Heath Cummings 2
+[sfb-poll] new: 72 Matt Harmon 2
+[sfb-poll] new: 78 Mike Wright 2
+[sfb-poll] new: 94 Rookie Fever 2 (rookies only)
+[sfb-poll] new: 104 Sigmund Bloom 2
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What is the current status in my leagues?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='What about Lindsay Rhodes?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text="No, she *IS* one of the leagues.  We're at 5"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='dawg.  No.  Lindsay Rhodes, not Liz Loza'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='so can I get a complete status now?   Also, when you write 1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='Dawg.....what the fuck....  <https://www47.myfantasyleague.c'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='Can you see the name of the person who is on the clock there'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='me'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='I guess I should make a pick'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text="I mean, you can't pass CMC here can you?"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='Yeah, I gotta take him.'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778719509.832899 text='2/22?  That was my first pick'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Can you summarize my picks in all my leagues?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='what pick number (for round 1) in each Draft?  Also, your "u'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='Look at all those again.  I know for sure 3 of them are wron'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='Now I know you have 2 of them wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='No, you have my pick in 2 of those leagues backwards'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='womp womp.  Now you have 2 right, 3 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="No, I like this game.  If you're not gonna look it up you ge"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='1 right, 4 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='All 5 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='All 5 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='3 right, 2 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='2 right, 3 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='1 right, 4 wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="1 right, 4 wrong, and you're being very stubborn on one of t"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="Well it's all up from here.  5 wrong"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='this is impressively bad.  All wrong'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="3 right, 2 wrong.  And I assure you, it wasn't"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='Liz is 1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='I took Jahmyr with 1.01 in Liz'
+[sfb-poll] new: 113 Ryan Hallam 2
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='well, now you have two #1s.  Jen is 8'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="That's Taylor and Pickens"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='JSN is correct for Harmon.  Pickens was R2 for Jen.  Lamb an'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[mfl-poll] events: [{'league': '37714', 'ts': '1778721373.888299', 'channel': 'C0B372BUZJ5', 'pick': 27}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text='I am 10th in the draft order for Harmon.  I look JSN Rd 1\nI '
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778720269.394589 text="yes but I am going to go to that thread to see if you'll hel"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text='yes'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text='we need to resubmit the pick'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text='yes'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778721373.888299 text="we're gonna try again here."
+[sfb-poll] new: 114 Wednesday Night Hangout
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[mfl-poll] events: [{'league': '42033', 'ts': '1778733506.138919', 'channel': 'C0B372BUZJ5', 'pick': 63}]
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778733506.138919 text='we redid some numbers - can you give me the top 20 again?'
+NLP API error
+Traceback (most recent call last):
+  File "/home/scott/FantasyFootball/src/ffassist/nlp.py", line 1098, in handle_message
+    for message in runner:
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/lib/tools/_beta_runner.py", line 167, in __iter__
+    for item in self._iterator:
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/lib/tools/_beta_runner.py", line 262, in __run__
+    with self._handle_request() as item:
+  File "/usr/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/lib/tools/_beta_runner.py", line 392, in _handle_request
+    message = self._client.beta.messages.parse(**self._params, **self._options)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/resources/beta/messages/messages.py", line 1241, in parse
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/_base_client.py", line 1374, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/_base_client.py", line 1147, in request
+    raise self._make_status_error_from_response(err.response) from None
+anthropic._exceptions.OverloadedError: Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011Cb23EFawBwshqSbCpkDzT'}
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778733506.138919 text='we redid some numbers - can you give me the top 20 again?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778733506.138919 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778733506.138919 text='no'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778733506.138919 text='I was concerned about an error so I manually took DeVonta Sm'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='please check status in each draft and tell me how many picks'
+[mfl-poll] events: [{'league': '46118', 'ts': '1778773315.405829', 'channel': 'C0B372BUZJ5', 'pick': 36}]
+[mfl-poll] events: [{'league': '54069', 'ts': '1778774554.396789', 'channel': 'C0B372BUZJ5', 'pick': 47}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778773315.405829 text='3'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778773315.405829 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778774554.396789 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778774554.396789 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What is the latest outlook for Joe Mixon going into the 2026'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What is the latest outlook for Joe Mixon going into the 2026'
+[mfl-poll] events: [{'league': '54069', 'ts': '1778794461.110259', 'channel': 'C0B372BUZJ5', 'pick': 62}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778794461.110259 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778794461.110259 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text="Can you make sure I'm not on the clock somewhere"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778801709.517589 text='Can you tell me what my next pick is for each so I know how '
+[mfl-poll] events: [{'league': '37714', 'ts': '1778807362.558209', 'channel': 'C0B372BUZJ5', 'pick': 45}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778807362.558209 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778807362.558209 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Confirming I’m not OTC anywhere, right?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Can you add this to your permanent memory?  It is the bye we'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778831740.447949 text='*AFC East*\n<https://sports.yahoo.com/nfl/teams/buffalo/|Buff'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778831740.447949 text='I think you’re missing a week 11 team'
+[mfl-poll] events: [{'league': '73196', 'ts': '1778848603.398619', 'channel': 'C0B372BUZJ5', 'pick': 30}]
+[sfb-poll] new: 27 DLF Podcast Team
+[mfl-poll] events: [{'league': '46118', 'ts': '1778859020.094729', 'channel': 'C0B372BUZJ5', 'pick': 54}]
+[sfb-poll] new: 20 Cooterdoodle 3
+[sfb-poll] AUTO-SIGNUP success: 20 Cooterdoodle 3
+[sfb-poll] new: 35 Heath Cummings 3
+[sfb-poll] new: 42 Jason Moore 2
+[sfb-poll] new: 52 JJ Zachariason 3
+[sfb-poll] new: 54 Joey Wright 2
+[sfb-poll] new: 78 Mike Wright 2
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778848603.398619 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778848603.398619 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778859020.094729 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778859020.094729 text='Yes'
+[mfl-poll] events: [{'league': '46118', 'ts': '1778868767.333799', 'channel': 'C0B372BUZJ5', 'pick': 55}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778868767.333799 text='20'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778868767.333799 text='yes'
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[mfl-poll] events: [{'league': '42033', 'ts': '1778876247.285409', 'channel': 'C0B372BUZJ5', 'pick': 82}]
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+[service] MFL poll every 300s (or 120s when an auto rule is on); SFB poll every 1800s; account-monitor every 1800s; starting Slack bot…
+⚡️ Bolt app is running!
+[sfb-poll] new: 67 Liz Loza 2
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='<https://www47.myfantasyleague.com/2026/home/46563#0|https:/'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[account-monitor] alerted on 1 new league(s)
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778886491.686539 text="I do have to tell when there is a new one, right?  You don't"
+[mfl-poll] events: [{'league': '54069', 'ts': '1778890827.378349', 'channel': 'C0B372BUZJ5', 'pick': 83}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778876247.285409 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778876247.285409 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='I need a league-by-league summary of players picked and at w'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778895924.474219 text='Just my players in all my leagues'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778895924.474219 text='show picks in terms of overall, not by round'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778890827.378349 text='6'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778890827.378349 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Can you look at the leagues and tell me every time Corey Boj'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778896201.690019 text='Yeah, that #2 is WAY an outlier.  Even the #73 IMO is way to'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text="Before I go to bed can you confirm I'm not on the clock in a"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778919898.082959 text='Including Bob Harris ?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778919898.082959 text='What pick is that one on?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What is the current top 20 for Matt Harmon?'
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=42033 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46563 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46563 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778920462.821619 text='<@U0B324H345B> this is wrong.  I already drafted Pitts mysel'
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778920462.821619 text='I need Mark Harmon, not Lindsay'
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=37714 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46563 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=42033 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=73196 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=37714 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=54069 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=46118 HTTPStatusError('MFL rate-limited (429) — try again in a minute')
+[mfl] 429 Too Many Requests — short 3s backoff + one retry.
+[poll-error] league=37714 HTTPStatusError("Server error '503 Service Unavailable' for url 'https://www47.myfantasyleague.com/2026/export?TYPE=draftResults&JSON=1&L=37714'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503")
+[poll-error] league=54069 HTTPStatusError("Server error '503 Service Unavailable' for url 'https://www47.myfantasyleague.com/2026/export?TYPE=draftResults&JSON=1&L=54069'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503")
+[poll-error] league=42033 HTTPStatusError("Server error '503 Service Unavailable' for url 'https://www47.myfantasyleague.com/2026/export?TYPE=draftResults&JSON=1&L=42033'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503")
+[mfl-poll] events: [{'league': '46563', 'ts': '1778937469.222749', 'channel': 'C0B372BUZJ5', 'pick': 6}]
+[mfl-poll] events: [{'league': '37714', 'ts': '1778942860.432479', 'channel': 'C0B372BUZJ5', 'pick': 64}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778937469.222749 text='Who did the first 5 people take in order?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778937469.222749 text='3'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778937469.222749 text='No'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778937469.222749 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778937469.222749 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778942860.432479 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778942860.432479 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='<https://www47.myfantasyleague.com/2026/home/57946|https://w'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[account-monitor] alerted on 1 new league(s)
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778951353.973299 text='You might want to poll now'
+[mfl-poll] events: [{'league': '57946', 'ts': '1778951494.701489', 'channel': 'C0B372BUZJ5', 'pick': 5}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778951494.701489 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778951494.701489 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='For every league I am in, what is my next overall pick and w'
+[mfl-poll] events: [{'league': '73196', 'ts': '1778974336.283129', 'channel': 'C0B372BUZJ5', 'pick': 48}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778974336.283129 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778974336.283129 text='Yes'
+[mfl-poll] events: [{'league': '54069', 'ts': '1778991814.584139', 'channel': 'C0B372BUZJ5', 'pick': 98}]
+[mfl-poll] events: [{'league': '37714', 'ts': '1778997911.273819', 'channel': 'C0B372BUZJ5', 'pick': 81}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778991814.584139 text='11'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778991814.584139 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778997911.273819 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778997911.273819 text='Yes'
+[mfl-poll] events: [{'league': '73196', 'ts': '1778998235.294749', 'channel': 'C0B372BUZJ5', 'pick': 61}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778997911.273819 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778998235.294749 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1778998235.294749 text='Yes'
+[poll-error] league=54069 RemoteProtocolError('Server disconnected without sending a response.')
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Making sure I’m not OTC anywhere?  Which draft is closest'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='<https://www47.myfantasyleague.com/2026/home/41300|https://w'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[account-monitor] alerted on 1 new league(s)
+[mfl-poll] events: [{'league': '41300', 'ts': '1779045313.403999', 'channel': 'C0B372BUZJ5', 'pick': 1}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779045313.403999 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779045313.403999 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779045313.403999 text='Can you put him in my pre-select list?'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779051195.855279', 'channel': 'C0B372BUZJ5', 'pick': 32}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779051195.855279 text='13'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779051195.855279 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779045313.403999 text='Try again'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='<https://www47.myfantasyleague.com/2026/home/28340|https://w'
+[bot-event] type=message subtype=message_changed ch=C0B372BUZJ5 ch_type=group user=None bot_id=None thread_ts=None text=''
+[account-monitor] alerted on 1 new league(s)
+[mfl-poll] events: [{'league': '46118', 'ts': '1779069137.644119', 'channel': 'C0B372BUZJ5', 'pick': 90}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779069137.644119 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779069137.644119 text='yes'
+[mfl-poll] events: [{'league': '46118', 'ts': '1779069456.453189', 'channel': 'C0B372BUZJ5', 'pick': 91}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779069456.453189 text='14'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779069456.453189 text='yes'
+[mfl-poll] events: [{'league': '46563', 'ts': '1779108478.884709', 'channel': 'C0B372BUZJ5', 'pick': 31}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779108478.884709 text='14'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779108478.884709 text='Yes'
+[mfl-poll] events: [{'league': '73196', 'ts': '1779128886.112709', 'channel': 'C0B372BUZJ5', 'pick': 84}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779128886.112709 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779128886.112709 text='no'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779128886.112709 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779128886.112709 text='yes'
+[mfl-poll] events: [{'league': '54069', 'ts': '1779130170.211849', 'channel': 'C0B372BUZJ5', 'pick': 119}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779130170.211849 text='14'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779130170.211849 text='yes'
+[mfl-poll] events: [{'league': '28340', 'ts': '1779130829.795699', 'channel': 'C0B372BUZJ5', 'pick': 4}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779130829.795699 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779130829.795699 text='yes'
+[mfl-poll] events: [{'league': '37714', 'ts': '1779135853.779419', 'channel': 'C0B372BUZJ5', 'pick': 100}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779135853.779419 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779135853.779419 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='How do Coaches score points?'
+[mfl-poll] events: [{'league': '54069', 'ts': '1779147338.167829', 'channel': 'C0B372BUZJ5', 'pick': 134}, {'league': '73196', 'ts': '1779147360.862779', 'channel': 'C0B372BUZJ5', 'pick': 97}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text="Didn't we determine that coach and defenses weren't great to"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779148835.018849 text='And punters are pure volume, right?  Like, if you have a goo'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779148835.018849 text="Well, I don't give a shit about the games as a whole - just "
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779148835.018849 text='what is the punter scoring again?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779148835.018849 text='well they would have to get at least 4 for an inside the 20.'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779148835.018849 text='And even if a coach wins by 20, which is rare they only scor'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779147338.167829 text='3'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779147338.167829 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779147360.862779 text='14'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779147360.862779 text='yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779153368.344709', 'channel': 'C0B372BUZJ5', 'pick': 50}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779153368.344709 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779153368.344709 text='yes'
+[mfl-poll] events: [{'league': '46563', 'ts': '1779196304.343579', 'channel': 'C0B372BUZJ5', 'pick': 49}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779196304.343579 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779196304.343579 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What pick us currently on the clock in cooterdoodle'
+[mfl-poll] events: [{'league': '37714', 'ts': '1779211406.931409', 'channel': 'C0B372BUZJ5', 'pick': 117}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779211406.931409 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779211406.931409 text='Yes'
+[mfl-poll] events: [{'league': '46118', 'ts': '1779216351.061869', 'channel': 'C0B372BUZJ5', 'pick': 126}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='The other time I took Orande Gadsen, what overall pick was i'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779216351.061869 text='8'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779216351.061869 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779216351.061869 text='if I had not taken Gadsen and instead asked "Who is availabl'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='In Liz Loza, which player left is more likely to be a real i'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Can you give me the rookie ADP rankings so far?'
+[mfl-poll] events: [{'league': '46118', 'ts': '1779219672.441729', 'channel': 'C0B372BUZJ5', 'pick': 127}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779219625.764699 text="I'm concerned you said Charbonnet was a TE"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779219672.441729 text='6'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779219672.441729 text='yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779220634.474879', 'channel': 'C0B372BUZJ5', 'pick': 59}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Am I correct that in general QBs will score less than TE/RB/'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779223406.951309 text='I mean, this format is completely position agnostic.  So I m'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779223406.951309 text="I don't need streaming flexibility.  There is no waiver wire"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='Are duplicate penalties really taking effect?  I am looking '
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779224045.037439 text='I just start getting scared when I draft a player TOO much. '
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779220634.474879 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779220634.474879 text='yes'
+[mfl-poll] events: [{'league': '41300', 'ts': '1779233846.202569', 'channel': 'C0B372BUZJ5', 'pick': 36}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779233846.202569 text='3'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779233846.202569 text='Yes'
+[mfl-poll] events: [{'league': '46563', 'ts': '1779243511.065259', 'channel': 'C0B372BUZJ5', 'pick': 60}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779243511.065259 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779243511.065259 text='yes'
+[mfl-poll] events: [{'league': '54069', 'ts': '1779244145.195269', 'channel': 'C0B372BUZJ5', 'pick': 155}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779244145.195269 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779244145.195269 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='How many leagues am I in?'
+[mfl-poll] events: [{'league': '28340', 'ts': '1779279505.232689', 'channel': 'C0B372BUZJ5', 'pick': 33}]
+[mfl-poll] events: [{'league': '73196', 'ts': '1779281858.737949', 'channel': 'C0B372BUZJ5', 'pick': 120}]
+[account-monitor-error] RemoteProtocolError('Server disconnected without sending a response.')
+[mfl-poll] events: [{'league': '37714', 'ts': '1779291087.926589', 'channel': 'C0B372BUZJ5', 'pick': 136}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779279505.232689 text='15'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779279505.232689 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779279505.232689 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779281858.737949 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779281858.737949 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779291087.926589 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779291087.926589 text='Yes'
+[mfl-poll] events: [{'league': '41300', 'ts': '1779295723.755509', 'channel': 'C0B372BUZJ5', 'pick': 54}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779295723.755509 text='6'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779295723.755509 text='Yes'
+[mfl-poll] events: [{'league': '41300', 'ts': '1779297010.427309', 'channel': 'C0B372BUZJ5', 'pick': 55}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779297010.427309 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779297010.427309 text='Yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779304313.831529', 'channel': 'C0B372BUZJ5', 'pick': 86}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779304313.831529 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779304313.831529 text='yes'
+[mfl-poll] events: [{'league': '54069', 'ts': '1779319121.111419', 'channel': 'C0B372BUZJ5', 'pick': 170}]
+[mfl-poll] events: [{'league': '73196', 'ts': '1779319449.082439', 'channel': 'C0B372BUZJ5', 'pick': 133}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319121.111419 text='3'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319121.111419 text='yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=None text='What are the 5 best tight ends available in Lindsay Rhodes?'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319714.055539 text="I know there aren't any there.  Thats why I wanted to know t"
+Error occurred while calling tool: get_available_players
+Traceback (most recent call last):
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/lib/tools/_beta_runner.py", line 344, in _generate_tool_call_response
+    result = tool.call(tool_use.input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/anthropic/lib/tools/_beta_functions.py", line 241, in call
+    return self._func_with_validate(**cast(Any, input))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/pydantic/_internal/_validate_call.py", line 40, in wrapper_function
+    return wrapper(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/.venv/lib/python3.12/site-packages/pydantic/_internal/_validate_call.py", line 137, in __call__
+    res = self.__pydantic_validator__.validate_python(pydantic_core.ArgsKwargs(args, kwargs))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/src/ffassist/nlp.py", line 404, in get_available_players
+    picks = parse_picks(mfl.draft_results(league_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scott/FantasyFootball/src/ffassist/mfl/client.py", line 199, in draft_results
+    return self._export("draftResults", league_id, force=force)["draftResults"]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'draftResults'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319714.055539 text="Jesus, and I just took Otton in the 10th, I can't take him i"
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319449.082439 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779319449.082439 text='yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779342335.758799', 'channel': 'C0B372BUZJ5', 'pick': 95}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779342335.758799 text='19'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779342335.758799 text='yes'
+[mfl-poll] events: [{'league': '28340', 'ts': '1779366072.853349', 'channel': 'C0B372BUZJ5', 'pick': 51}]
+[mfl-poll] events: [{'league': '37714', 'ts': '1779380664.266859', 'channel': 'C0B372BUZJ5', 'pick': 153}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779366072.853349 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779366072.853349 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779380664.266859 text='13'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779380664.266859 text='Yes'
+[mfl-poll] events: [{'league': '54069', 'ts': '1779398180.573289', 'channel': 'C0B372BUZJ5', 'pick': 191}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779398180.573289 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779398180.573289 text='yes'
+[mfl-poll] events: [{'league': '46118', 'ts': '1779403123.211939', 'channel': 'C0B372BUZJ5', 'pick': 162}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779403123.211939 text='2'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779403123.211939 text='yes'
+[mfl-poll] events: [{'league': '46118', 'ts': '1779403769.037649', 'channel': 'C0B372BUZJ5', 'pick': 163}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779403769.037649 text='7'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779403769.037649 text='yes'
+[mfl-poll] events: [{'league': '28340', 'ts': '1779409044.720149', 'channel': 'C0B372BUZJ5', 'pick': 58}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779409044.720149 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779409044.720149 text='yes'
+[mfl-poll] events: [{'league': '37714', 'ts': '1779419336.723599', 'channel': 'C0B372BUZJ5', 'pick': 172}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779419336.723599 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779419336.723599 text='Yes'
+[mfl-poll] events: [{'league': '73196', 'ts': '1779442119.869039', 'channel': 'C0B372BUZJ5', 'pick': 156}]
+[mfl-poll] events: [{'league': '54069', 'ts': '1779444366.220569', 'channel': 'C0B372BUZJ5', 'pick': 206}]
+[mfl-poll] events: [{'league': '46563', 'ts': '1779454367.210069', 'channel': 'C0B372BUZJ5', 'pick': 85}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779442119.869039 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779442119.869039 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779444366.220569 text='9'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779444366.220569 text='Yes'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779454367.210069 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779454367.210069 text='Yes'
+[mfl-poll] events: [{'league': '46563', 'ts': '1779472199.008269', 'channel': 'C0B372BUZJ5', 'pick': 96}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779472199.008269 text='5'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779472199.008269 text='Yes'
+[mfl-poll] events: [{'league': '73196', 'ts': '1779481107.830159', 'channel': 'C0B372BUZJ5', 'pick': 169}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779481107.830159 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779481107.830159 text='yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779485733.511679', 'channel': 'C0B372BUZJ5', 'pick': 122}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779485733.511679 text='1'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779485733.511679 text='yes'
+[mfl-poll] events: [{'league': '37714', 'ts': '1779486365.573739', 'channel': 'C0B372BUZJ5', 'pick': 189}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779486365.573739 text='4'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779486365.573739 text='yes'
+[mfl-poll] events: [{'league': '41300', 'ts': '1779500994.394749', 'channel': 'C0B372BUZJ5', 'pick': 90}]
+[poll-error] league=54069 ConnectError('[Errno 111] Connection refused')
+[poll-error] league=42033 ConnectError('[Errno 111] Connection refused')
+[poll-error] league=46118 ConnectError('[Errno 111] Connection refused')
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779500994.394749 text='8'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779500994.394749 text='Yes'
+[mfl-poll] events: [{'league': '41300', 'ts': '1779519795.594709', 'channel': 'C0B372BUZJ5', 'pick': 91}]
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779519795.594709 text='8'
+[bot-event] type=message subtype=None ch=C0B372BUZJ5 ch_type=group user=UKB2899MM bot_id=None thread_ts=1779519795.594709 text='Yes'
+[mfl-poll] events: [{'league': '57946', 'ts': '1779548902.722879', 'channel': 'C0B372BUZJ5', 'pick': 131}]
