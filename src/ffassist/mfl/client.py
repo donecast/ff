@@ -210,6 +210,61 @@ class MFLClient:
             params["POSITION"] = position
         return self._export("playerRanks", force=force, **params)["playerRanks"]
 
+    def get_draft_list(self, league_id: str) -> list[str]:
+        """Return MFL's native rest-of-draft auto-pick list (the one MFL uses when
+        auto-picking for the franchise). Empty list if not set.
+
+        Reads TYPE=myDraftList for the authenticated franchise.
+        """
+        self.ensure_auth()
+        raw = self._export("myDraftList", league_id, force=True)
+        # MFL returns {"myDraftList": {"player": [{"id": "..."}|"...", ...]}} or similar.
+        node = raw.get("myDraftList") if isinstance(raw, dict) else None
+        if not node:
+            return []
+        players = node.get("player") if isinstance(node, dict) else None
+        if not players:
+            return []
+        if isinstance(players, dict):
+            players = [players]
+        out: list[str] = []
+        for p in players:
+            if isinstance(p, dict):
+                pid = p.get("id") or p.get("player_id")
+                if pid:
+                    out.append(str(pid))
+            elif isinstance(p, str):
+                out.append(p)
+        return out
+
+    def set_draft_list(self, league_id: str, player_ids: list[str]) -> dict:
+        """REPLACE MFL's native rest-of-draft auto-pick list with `player_ids` in order.
+
+        POSTs to /{year}/import?TYPE=myDraftList with PLAYERS=pid1,pid2,...
+
+        Authenticated; covers the logged-in franchise. Empty list clears the MFL list.
+        Overwrites the entire list (MFL does NOT merge).
+        """
+        self.ensure_auth()
+        url = f"{self._base(league_id)}/import"
+        params: dict[str, Any] = {
+            "TYPE": "myDraftList",
+            "L": league_id,
+            "PLAYERS": ",".join(str(p) for p in player_ids),
+            "JSON": 1,
+        }
+        if self.apikey:
+            params["APIKEY"] = self.apikey
+        r = self._do_request("POST", url, params)
+        r.raise_for_status()
+        body = (r.text or "").strip()
+        if not body:
+            return {"raw_status": r.status_code, "raw_body": "", "note": "empty response — verify via get_draft_list"}
+        try:
+            return r.json()
+        except Exception:
+            return {"raw_status": r.status_code, "raw_body": body[:500], "note": "non-JSON response"}
+
     def submit_live_draft_pick(
         self, league_id: str, player_id: str, round_: int, pick: int
     ) -> dict:

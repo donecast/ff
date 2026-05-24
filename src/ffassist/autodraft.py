@@ -13,12 +13,31 @@ from __future__ import annotations
 from ffassist import state as state_mod
 
 
+def _push_to_mfl(league_id: str, player_ids: list[str]) -> tuple[bool, str]:
+    """Best-effort push to MFL's native myDraftList. Returns (ok, message).
+
+    Failures are non-fatal — local state still updates. Caller may display message.
+    """
+    try:
+        from ffassist.mfl.client import MFLClient
+
+        with MFLClient() as mfl:
+            resp = mfl.set_draft_list(league_id, player_ids)
+        raw = resp.get("raw_body", "") if isinstance(resp, dict) else ""
+        if "<status>OK" in raw or resp.get("status") == "OK":
+            return True, f"MFL updated ({len(player_ids)} entries)."
+        return False, f"MFL response: {resp!r}"
+    except Exception as e:
+        return False, f"MFL push raised: {e!r}"
+
+
 def get_list(league_id: str) -> list[str]:
     state = state_mod.load()
     return list(state.get("leagues", {}).get(league_id, {}).get("autodraft_list") or [])
 
 
-def set_list(league_id: str, player_ids: list[str]) -> None:
+def set_list(league_id: str, player_ids: list[str], push_to_mfl: bool = True) -> tuple[bool, str]:
+    """Replace the list. Pushes to MFL by default. Returns (mfl_ok, mfl_message)."""
     state = state_mod.load()
     ls = state.setdefault("leagues", {}).setdefault(league_id, {})
     # Dedupe while preserving order
@@ -30,28 +49,42 @@ def set_list(league_id: str, player_ids: list[str]) -> None:
             deduped.append(pid)
     ls["autodraft_list"] = deduped
     state_mod.save(state)
+    if push_to_mfl:
+        return _push_to_mfl(league_id, deduped)
+    return True, "MFL push skipped."
 
 
-def add(league_id: str, player_id: str, index: int | None = None) -> bool:
-    """Append or insert. Returns False if already in the list."""
+def add(league_id: str, player_id: str, index: int | None = None) -> tuple[bool, tuple[bool, str]]:
+    """Append or insert. Returns (added, (mfl_ok, mfl_msg)).
+    `added` is False if already in the list.
+    """
     lst = get_list(league_id)
     if player_id in lst:
-        return False
+        return False, (True, "no-op")
     if index is None or index >= len(lst):
         lst.append(player_id)
     else:
         lst.insert(max(index, 0), player_id)
-    set_list(league_id, lst)
-    return True
+    mfl_result = set_list(league_id, lst)
+    return True, mfl_result
 
 
-def remove(league_id: str, player_id: str) -> bool:
+def remove(league_id: str, player_id: str) -> tuple[bool, tuple[bool, str]]:
+    """Returns (removed, (mfl_ok, mfl_msg))."""
     lst = get_list(league_id)
     if player_id not in lst:
-        return False
+        return False, (True, "no-op")
     lst.remove(player_id)
-    set_list(league_id, lst)
-    return True
+    mfl_result = set_list(league_id, lst)
+    return True, mfl_result
+
+
+def fetch_from_mfl(league_id: str) -> list[str]:
+    """Read MFL's current native myDraftList for the authenticated franchise."""
+    from ffassist.mfl.client import MFLClient
+
+    with MFLClient() as mfl:
+        return mfl.get_draft_list(league_id)
 
 
 def next_available(league_id: str, drafted_ids: set[str]) -> str | None:

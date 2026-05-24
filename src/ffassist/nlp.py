@@ -734,9 +734,11 @@ def set_autodraft_list(league_id: str, players_csv: str) -> str:
             misses.append(q)
     if not resolved:
         return ":x: No players matched. Misses: " + ", ".join(misses)
-    autodraft.set_list(lid, resolved)
+    mfl_ok, mfl_msg = autodraft.set_list(lid, resolved)
     host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
-    out = [f":white_check_mark: Set {host} auto-draft list ({len(resolved)} entries):"]
+    header = f":white_check_mark: Set {host} auto-draft list ({len(resolved)} entries)"
+    header += " — :large_green_circle: synced to MFL." if mfl_ok else f" — :red_circle: MFL push FAILED: {mfl_msg}"
+    out = [header]
     for i, d in enumerate(display, 1):
         out.append(f"  {i:>2}. {d}")
     if misses:
@@ -746,29 +748,47 @@ def set_autodraft_list(league_id: str, players_csv: str) -> str:
 
 @beta_tool
 def add_to_autodraft_list(league_id: str, player_name: str, position: int | None = None) -> str:
-    """Add a single player to the auto-draft list.
+    """Add a single player to the auto-draft list. Returns the updated full list.
 
     By default appends at the end. Pass `position` (1-based) to insert at a specific
     spot — e.g. position=1 makes them the next pick if Scott goes on the clock.
+
+    Always includes the full current list in the response so Scott can see what's there.
     """
     from ffassist import autodraft
-    from ffassist.draft_state import parse_players
+    from ffassist.draft_state import parse_picks, parse_players
 
     lid = _resolve_league(league_id)
     if not lid:
         return f"Could not resolve league '{league_id}'."
     with MFLClient() as mfl:
         players = parse_players(mfl.players())
+        drafted = {p.player_id for p in parse_picks(mfl.draft_results(lid))}
     pid, disp = _resolve_player_for_autodraft(player_name, players)
     if not pid:
         return disp
-    idx = (position - 1) if position else None
-    added = autodraft.add(lid, pid, index=idx)
     host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+
+    idx = (position - 1) if position else None
+    added, (mfl_ok, mfl_msg) = autodraft.add(lid, pid, index=idx)
+
     if not added:
-        return f"_{disp} was already on the {host} list._"
-    spot = f"position {position}" if position else f"end ({len(autodraft.get_list(lid))})"
-    return f":white_check_mark: Added *{disp}* to {host} auto-draft list at {spot}."
+        header = f"_{disp} was already on the {host} list._"
+    else:
+        spot = f"position {position}" if position else f"end"
+        sync_tag = ":large_green_circle: synced to MFL" if mfl_ok else f":red_circle: MFL push FAILED: {mfl_msg}"
+        header = f":white_check_mark: Added *{disp}* at {spot}. {sync_tag}."
+
+    # Always show the current list
+    current = autodraft.get_list(lid)
+    lines = [header, f"*{host} list now ({len(current)} entries):*"]
+    for i, p in enumerate(current, 1):
+        pl = players.get(p)
+        name = pl.display() if pl else f"player_id={p}"
+        tag = " ~drafted~" if p in drafted else ""
+        marker = " :new:" if p == pid and added else ""
+        lines.append(f"  {i:>2}. {name}{tag}{marker}")
+    return "\n".join(lines)
 
 
 @beta_tool
@@ -792,9 +812,10 @@ def remove_from_autodraft_list(league_id: str, player_name: str) -> str:
     if not match:
         return f"No player on the list matched '{player_name}'."
     pid = on_list_names[match[0]]
-    autodraft.remove(lid, pid)
+    _, (mfl_ok, mfl_msg) = autodraft.remove(lid, pid)
     host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
-    return f":white_check_mark: Removed *{match[0]}* from {host} auto-draft list."
+    suffix = " :large_green_circle: synced to MFL." if mfl_ok else f" :red_circle: MFL push FAILED: {mfl_msg}"
+    return f":white_check_mark: Removed *{match[0]}* from {host} auto-draft list.{suffix}"
 
 
 @beta_tool
@@ -822,11 +843,71 @@ def seed_autodraft_from_top20(league_id: str, n: int = 20) -> str:
         return f":x: No top-20 entries available for L{lid}."
     n = max(1, min(n, len(cached)))
     pids = [entry["player_id"] for entry in cached[:n]]
-    autodraft.set_list(lid, pids)
+    mfl_ok, mfl_msg = autodraft.set_list(lid, pids)
     host = ls.get("display_name") or f"L{lid}"
-    lines = [f":white_check_mark: Seeded {host} auto-draft list from top-{n}:"]
+    header = f":white_check_mark: Seeded {host} auto-draft list from top-{n}"
+    header += " — :large_green_circle: synced to MFL." if mfl_ok else f" — :red_circle: MFL push FAILED: {mfl_msg}"
+    lines = [header]
     for i, entry in enumerate(cached[:n], 1):
         lines.append(f"  {i:>2}. {entry['player_name']} ({entry['position']} {entry['team']})")
+    return "\n".join(lines)
+
+
+@beta_tool
+def sync_autodraft_to_mfl(league_id: str) -> str:
+    """Re-push the local auto-draft list to MFL's native myDraftList for a league.
+
+    Use when MFL and the bot are out of sync, or after the bot has been editing
+    locally without MFL ack. Reads back the MFL list after pushing to confirm.
+    """
+    from ffassist import autodraft
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    local = autodraft.get_list(lid)
+    mfl_ok, mfl_msg = autodraft._push_to_mfl(lid, local)
+    try:
+        after = autodraft.fetch_from_mfl(lid)
+    except Exception as e:
+        return f":x: Pushed {len(local)} but readback failed: {e!r}. Push message: {mfl_msg}"
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    if after == local:
+        return f":white_check_mark: {host} auto-draft list synced to MFL ({len(local)} entries verified)."
+    return (
+        f":warning: {host} sync MISMATCH after push.\n"
+        f"  local: {len(local)} entries\n"
+        f"  MFL:   {len(after)} entries\n"
+        f"  push response: {mfl_msg}"
+    )
+
+
+@beta_tool
+def get_mfl_autodraft_list(league_id: str) -> str:
+    """Read MFL's native myDraftList for a league (what MFL itself will use when
+    auto-picking for Scott). Use this to verify what MFL has, separate from the
+    bot's local list. Differences mean a sync_autodraft_to_mfl is needed.
+    """
+    from ffassist import autodraft
+    from ffassist.draft_state import parse_players
+
+    lid = _resolve_league(league_id)
+    if not lid:
+        return f"Could not resolve league '{league_id}'."
+    try:
+        mfl_list = autodraft.fetch_from_mfl(lid)
+    except Exception as e:
+        return f":x: Could not read MFL draft list: {e!r}"
+    host = state_mod.load().get("leagues", {}).get(lid, {}).get("display_name") or f"L{lid}"
+    if not mfl_list:
+        return f"*{host}* MFL native draft list is *empty*."
+    with MFLClient() as mfl:
+        players = parse_players(mfl.players())
+    lines = [f"*{host}* MFL native draft list ({len(mfl_list)} entries):"]
+    for i, pid in enumerate(mfl_list, 1):
+        pl = players.get(pid)
+        name = pl.display() if pl else f"player_id={pid}"
+        lines.append(f"  {i:>2}. {name}")
     return "\n".join(lines)
 
 
@@ -1440,6 +1521,8 @@ TOOLS = [
     add_to_autodraft_list,
     remove_from_autodraft_list,
     seed_autodraft_from_top20,
+    sync_autodraft_to_mfl,
+    get_mfl_autodraft_list,
     set_mfl_auto_mode,
     propose_pick,
     get_rules_summary,
