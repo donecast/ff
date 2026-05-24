@@ -207,10 +207,6 @@ def poll_once(
     if not use_cached:
         try:
             top20_text, top20_list = _r2.build_league_top_20(league_id, mfl, settings)
-            league_state["last_top20_text"] = top20_text
-            league_state["last_top20"] = top20_list
-            league_state["last_top20_at"] = now
-            league_state["last_top20_pick"] = next_pick
             cached_label = "(fresh)"
         except Exception as e:
             top20_text = f":x: Top-20 build failed: {e!r}"
@@ -219,6 +215,38 @@ def poll_once(
     else:
         age_min = int((now - last_top20_at) / 60)
         cached_label = f"(reusing list cached {age_min}m ago — within 30-min window)"
+
+    # If any of the top-3 flex (ADP-based preview) are NOT in the top-20
+    # (PPG-blended), append them as #21/#22/#23 so everything Scott sees is
+    # in the numbered list and pickable by number.
+    if top20_list and flex_top:
+        existing_ids = {entry["player_id"] for entry in top20_list}
+        extras: list[tuple] = [(pl, adp) for pl, adp in flex_top if pl.id not in existing_ids]
+        if extras:
+            extra_lines: list[str] = []
+            next_rank = len(top20_list) + 1
+            for pl, adp in extras:
+                adp_s = f"ADP {adp:.1f}" if adp is not None else "—"
+                extra_lines.append(
+                    f"{next_rank}. {pl.display()} (—/{adp_s}/—) [from flex top-3 preview]"
+                )
+                top20_list.append({
+                    "rank": next_rank,
+                    "player_id": pl.id,
+                    "player_name": pl.name,
+                    "position": pl.position,
+                    "team": pl.team,
+                    "fp": None,
+                })
+                next_rank += 1
+            top20_text = top20_text.rstrip() + "\n" + "\n".join(extra_lines)
+
+    # Persist the (possibly extended) list & text
+    if not use_cached:
+        league_state["last_top20_text"] = top20_text
+        league_state["last_top20"] = top20_list
+        league_state["last_top20_at"] = now
+        league_state["last_top20_pick"] = next_pick
 
     state["threads"][result["ts"]] = {
         "league_id": league_id,
@@ -236,13 +264,15 @@ def poll_once(
     # Post the top-20 as a thread reply
     if top20_text:
         fp_legend = "  · `[ECR/PosRk]` = FantasyPros ECR / position rank" if settings.fp_api_key else ""
+        max_n = len(top20_list) if top20_list else 20
+        title = f"*Top {max_n} in {label}'s league*" if max_n != 20 else f"*Top 20 in {label}'s league*"
         notifier.post(
             result["channel"],
-            f"*Top 20 in {label}'s league* {cached_label}\n"
+            f"{title} {cached_label}\n"
             "Format: rank. Name (Pos, Team) (PPG_rank/ADP/Raw_rank-fce) {dupes/bye_twins}\n"
             "  · `fce` = # of tracked FCE drafts this player has been selected in\n"
             f"{fp_legend}\n"
-            "Reply with a number 1-20 to draft that player.\n\n"
+            f"Reply with a number 1-{max_n} to draft that player.\n\n"
             f"{top20_text}",
             thread_ts=result["ts"],
         )
